@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Empathy Bot</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Empathy-Bot Web Interface" />
+  <link rel="preload" href="styles.css" as="style" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo-wrap">
+      <img src="assets/logo.svg" alt="Empathy Bot Logo" class="logo" />
+      <h1>Empathy Bot</h1>
+    </div>
+    <nav class="header-actions">
+      <button id="toggle-theme" aria-label="Toggle color theme">🌓</button>
+      <button id="open-settings" aria-haspopup="dialog" aria-controls="settings-dialog">⚙️</button>
+      <button id="clear-chat" aria-label="Clear conversation">🗑️</button>
+    </nav>
+  </header>
+
+  <main id="chat" aria-live="polite" aria-label="Chat conversation"></main>
+
+  <form id="chat-form" autocomplete="off">
+    <textarea
+      id="user-input"
+      placeholder="Share what’s on your mind..."
+      rows="1"
+      required
+      aria-label="Message input"
+    ></textarea>
+    <button type="submit" id="send-btn" title="Send message">Send</button>
+  </form>
+
+  <dialog id="settings-dialog" aria-labelledby="settings-title">
+    <form method="dialog" class="settings-form">
+      <h2 id="settings-title">Settings</h2>
+      <label>
+        API Endpoint
+        <input type="url" id="api-endpoint" placeholder="https://empathy-bot.example.com/api/chat" />
+      </label>
+      <label class="checkbox-row">
+        <input type="checkbox" id="simulate-stream" />
+        Simulate streaming output
+      </label>
+      <menu class="settings-actions">
+        <button id="save-settings" value="save" class="primary">Save</button>
+        <button value="cancel">Close</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <template id="message-template">
+    <div class="msg">
+      <div class="avatar" aria-hidden="true"></div>
+      <div class="bubble">
+        <div class="meta">
+          <span class="role"></span>
+          <time class="timestamp"></time>
+        </div>
+        <div class="content"></div>
+      </div>
+    </div>
+  </template>
+
+  <noscript>
+    <p class="no-js">This interface requires JavaScript to function.</p>
+  </noscript>
+
+  <script src="config.js"></script>
+  <script src="script.js" type="module"></script>
+</body>
+</html>
